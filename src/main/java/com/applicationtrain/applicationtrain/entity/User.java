@@ -1,0 +1,202 @@
+package com.applicationtrain.applicationtrain.entity;
+
+
+import jakarta.persistence.*;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String firstname;
+    private String lastname;
+    private Date date_of_birth;
+    private String pseudo;
+    private String mail;
+
+    private String password;
+
+    private String gender;
+    private int train_number;
+
+    private int car_number;
+
+    private String description;
+
+    private int size;
+
+    @OneToMany(mappedBy = "user")
+    private List<Picture> pictures;
+
+    @OneToMany(mappedBy = "messageSender")
+    private List<Message> messagesSended;
+
+    @OneToMany(mappedBy = "messageReceiver")
+    private List<Message> messagesReceived;
+
+    @OneToMany(mappedBy = "likeSender")
+    private List<LikeEntity> likesSended;
+
+    @OneToMany(mappedBy = "likeReceiver")
+    private List<LikeEntity> likesReceived;
+
+
+
+    public User() {
+    }
+
+
+    public User(String firstname, String lastname, Date date_of_birth, String pseudo, String mail, String password, String gender) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.date_of_birth = date_of_birth;
+        this.pseudo = pseudo;
+        this.mail = mail;
+        this.password = password;
+        this.gender = gender;
+    }
+
+    public List<LikeEntity> getLikesSended() {
+        return likesSended;
+    }
+
+    public void setLikesSended(List<LikeEntity> likesSended) {
+        this.likesSended = likesSended;
+    }
+
+    public List<LikeEntity> getLikesReceived() {
+        return likesReceived;
+    }
+
+    public void setLikesReceived(List<LikeEntity> likesReceived) {
+        this.likesReceived = likesReceived;
+    }
+
+    public List<Message> getMessagesSended() {
+        return messagesSended;
+    }
+
+    public void setMessagesSended(List<Message> messagesSended) {
+        this.messagesSended = messagesSended;
+    }
+
+    public List<Message> getMessagesReceived() {
+        return messagesReceived;
+    }
+
+    public void setMessagesReceived(List<Message> messagesReceived) {
+        this.messagesReceived = messagesReceived;
+    }
+
+
+
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getTrain_number() {
+        return train_number;
+    }
+
+    public void setTrain_number(int train_number) {
+        this.train_number = train_number;
+    }
+
+    public int getCar_number() {
+        return car_number;
+    }
+
+    public void setCar_number(int car_number) {
+        this.car_number = car_number;
+    }
+}
