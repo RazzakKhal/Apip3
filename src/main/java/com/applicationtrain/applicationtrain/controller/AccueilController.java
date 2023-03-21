@@ -14,7 +14,10 @@ public class AccueilController {
     private UserRepository userRepository;
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public User userInscription(@RequestBody User user){
-        userRepository.save(user);
-        return user;
+
+    userRepository.save(user);
+    return user;
+
+
     }
 }
