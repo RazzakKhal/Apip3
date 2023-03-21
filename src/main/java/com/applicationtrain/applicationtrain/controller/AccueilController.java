@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RequestMapping("/accueil")
 public class AccueilController {
+
     @Autowired
     private UserRepository userRepository;
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public User userInscription(@RequestBody User user){
+
     userRepository.save(user);
     return user;
 
 
     }
-
 }
