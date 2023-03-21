@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -15,9 +16,12 @@ public class GalleryController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/femme", method = RequestMethod.GET)
-    public List<User> usersByGenderF(){
-        List<User> usersFemmes = userRepository.findFemaleByTrainNumber();
+    @RequestMapping(value = "/femme/{id}", method = RequestMethod.GET)
+    public List<User> usersByGenderF(@PathVariable Long id){
+        // recupérer l'utilisateur connecté
+       Optional<User> female = userRepository.findById(id);
+        // récupérer son numero de train
+        List<User> usersFemmes = userRepository.findFemaleByTrainNumber(female.get().getTrain_number());
         return usersFemmes;
     }
 
