@@ -14,6 +14,8 @@ public class User {
     private Long id;
     private String firstname;
     private String lastname;
+
+    private String role;
     private Date date_of_birth;
     private String pseudo;
     private String mail;
@@ -58,6 +60,14 @@ public class User {
         this.mail = mail;
         this.password = password;
         this.gender = gender;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<LikeEntity> getLikesSended() {
