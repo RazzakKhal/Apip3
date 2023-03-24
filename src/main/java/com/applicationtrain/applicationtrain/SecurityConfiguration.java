@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,21 +25,16 @@ public class SecurityConfiguration {
                 )
 
                 .httpBasic(withDefaults()) // définit la facon de s'authentifier
-                .cors(); // ajoute une en-tete CORS aux réponses (sans quoi erreur)
+
+                .cors();// ajoute une en-tete CORS aux réponses (sans quoi erreur)
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // cela signifie que l'on n'utilisera pas de session pour stocker des infos coté back
+
 
         return http.build();
     }
 
-/*
-      @Bean
-       public WebSecurityCustomizer webSecurityCustomizer() {
 
-           return (web) -> web.ignoring().anyRequest();
-
-          // Sert à ignorer les routes chosies pour qu'elles n"aient pas besoin d'authentification
-       }
-
-*/
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
