@@ -12,19 +12,24 @@ import java.util.ArrayList;
 
 @Service
 public class AccueilServiceImpl implements AccueilService, UserDetailsService {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    UserRepository userRepository;
+    public AccueilServiceImpl( UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+    }
+
     @Override
-    public User userInscription(User user) {
+    public User userInscription(User user, BCryptPasswordEncoder bCryptPasswordEncoder) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }
 
     // methode qui récupere un utilisateur par son mail et renvoi un User de type UserDetail avec les informations d'authentification
-    @Override
+  @Override
     public UserDetails loadUserByUsername(String mail){
       User userFind = userRepository.findByMail(mail);
         return new org.springframework.security.core.userdetails.User(userFind.getMail(), userFind.getPassword(), new ArrayList<>());

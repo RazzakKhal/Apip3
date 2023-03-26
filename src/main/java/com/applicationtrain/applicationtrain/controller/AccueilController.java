@@ -3,10 +3,18 @@ package com.applicationtrain.applicationtrain.controller;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AccueilService;
+import com.applicationtrain.applicationtrain.service.AccueilServiceImpl;
 import com.applicationtrain.applicationtrain.service.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @CrossOrigin
@@ -14,12 +22,16 @@ import org.springframework.web.bind.annotation.*;
 public class AccueilController {
 
     @Autowired
-    private AccueilService accueilService;
+    private AccueilServiceImpl accueilService;
 
-    private AuthenticationManager authenticationManager;
-    private JwtTokenProvider tokenProvider;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider tokenProvider;
 
 
+    @Autowired
     AccueilController(AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider){
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
@@ -27,7 +39,7 @@ public class AccueilController {
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public User userInscription(@RequestBody User user){
-        return accueilService.userInscription(user);
+        return accueilService.userInscription(user, bCryptPasswordEncoder);
 
     }
 
@@ -37,11 +49,10 @@ public class AccueilController {
     // l'utilisateur en créant un nouvel objet UsernamePasswordAuthenticationToken avec le nom d'utilisateur et le mot de passe fournis.
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
-    public String userConnexion(@RequestBody Object connexionForm){
-
-
-        return "LE TOKEN";
-
-
+    public ResponseEntity<?> authenticateUser(@RequestBody User user) {
+        UserDetails userDetail = accueilService.loadUserByUsername(user.getMail());
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDetail, null, new ArrayList<>()));
+        String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(jwt);
     }
 }

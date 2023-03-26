@@ -10,11 +10,15 @@ import java.util.Date;
 
 @Service
 public class JwtTokenProvider {
+
+    // clé secrète du token définie dans application.properties
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
-    //Les annotations @Value permettent d'injecter des valeurs de propriétés externes
-    // (généralement définies dans un fichier application.properties ou application.yml)
+
+
+
+    // signifie que le token expirera dans 86.400.000 millisecondes soit 1jour
     @Value("${app.jwt.expiration}")
     private long jwtExpirationInMillis;
 

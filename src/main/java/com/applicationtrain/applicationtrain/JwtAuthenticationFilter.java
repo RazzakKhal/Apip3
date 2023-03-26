@@ -21,16 +21,15 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
-    private AccueilServiceImpl accueilService;
+    private final AccueilServiceImpl accueilService;
 
-    public JwtAuthenticationFilter() {
 
-    }
 
     // injection de dépendance pour avoir une instance dans mes propriétés jwtTokenProvider et accueilService
+    @Autowired
     public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, AccueilServiceImpl accueilService) {
         this.jwtTokenProvider = tokenProvider;
         this.accueilService = accueilService;
