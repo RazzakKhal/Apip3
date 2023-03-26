@@ -51,7 +51,7 @@ public class AccueilController {
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
     public ResponseEntity<?> authenticateUser(@RequestBody User user) {
         UserDetails userDetail = accueilService.loadUserByUsername(user.getMail());
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDetail, null, new ArrayList<>()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDetail.getUsername(), userDetail.getPassword()));
         String jwt = tokenProvider.generateToken(authentication);
         return ResponseEntity.ok(jwt);
     }

@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.gender = 'M' AND u.train_number = 1850" )
     List<User> findMaleByTrainNumber();
 
-    User findByMail(String mail);
+    <Optional>User findByMail(String mail);
 
 }
