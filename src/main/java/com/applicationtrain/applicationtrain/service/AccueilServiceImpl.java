@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class AccueilServiceImpl implements AccueilService, UserDetailsService {
+public class AccueilServiceImpl implements AccueilService {
 
     private final UserRepository userRepository;
 
@@ -28,10 +28,5 @@ public class AccueilServiceImpl implements AccueilService, UserDetailsService {
         return user;
     }
 
-    // methode qui récupere un utilisateur par son mail et renvoi un User de type UserDetail avec les informations d'authentification
-  @Override
-    public UserDetails loadUserByUsername(String mail){
-      User userFind = userRepository.findByMail(mail);
-        return new org.springframework.security.core.userdetails.User(userFind.getMail(), userFind.getPassword(), new ArrayList<>());
-    }
+
 }

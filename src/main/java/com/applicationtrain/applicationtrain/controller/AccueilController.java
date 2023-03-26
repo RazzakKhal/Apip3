@@ -48,11 +48,5 @@ public class AccueilController {
     // Ensuite, nous utilisons l'AuthenticationManager pour authentifier
     // l'utilisateur en créant un nouvel objet UsernamePasswordAuthenticationToken avec le nom d'utilisateur et le mot de passe fournis.
 
-    @RequestMapping(value = "/connexion", method = RequestMethod.POST)
-    public ResponseEntity<?> authenticateUser(@RequestBody User user) {
-        UserDetails userDetail = accueilService.loadUserByUsername(user.getMail());
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userDetail.getUsername(), userDetail.getPassword()));
-        String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(jwt);
-    }
+
 }
