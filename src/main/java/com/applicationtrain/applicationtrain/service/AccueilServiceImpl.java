@@ -1,7 +1,9 @@
 package com.applicationtrain.applicationtrain.service;
 
+import com.applicationtrain.applicationtrain.JwtUtil;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,23 +12,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+
 @Service
+@RequiredArgsConstructor
 public class AccueilServiceImpl implements AccueilService {
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    public AccueilServiceImpl( UserRepository userRepository) {
-
-        this.userRepository = userRepository;
-    }
 
     @Override
-    public User userInscription(User user, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public String userInscription(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return user;
+      var saveduser = userRepository.save(user);
+      return jwtUtil.generateToken(saveduser);
+
     }
+
 
 
 }

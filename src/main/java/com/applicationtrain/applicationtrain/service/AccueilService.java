@@ -8,5 +8,5 @@ public interface AccueilService {
 
 
 
-    User userInscription(User user, BCryptPasswordEncoder bCryptPasswordEncoder);
+    String userInscription(User user);
 }
