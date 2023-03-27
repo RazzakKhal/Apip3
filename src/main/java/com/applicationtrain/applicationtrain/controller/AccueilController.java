@@ -4,6 +4,7 @@ import com.applicationtrain.applicationtrain.JwtUtil;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AccueilService;
+import com.applicationtrain.applicationtrain.service.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,21 +23,21 @@ public class AccueilController {
     private final AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String userRegister(@RequestBody User user) {
-        return accueilService.userInscription(user);
+    public void userRegister(@RequestBody User user) {
+         accueilService.userInscription(user);
     }
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
-    public String userConnexion(@RequestBody User user) {
+    public TokenResponse userConnexion(@RequestBody User user) throws Exception {
         UserDetails userRecup = userRepository.findByMail(user.getMail());
         if(userRecup != null){
             String token = jwtUtil.generateToken(userRecup);
            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword()));
 
-                return token;
+                return new TokenResponse(token);
         }
     else {
-        return "mauvaise authentification";
+        throw new Exception("Erreur dans l'authentification");
     }
 }
 
