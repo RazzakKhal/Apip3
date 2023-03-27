@@ -28,7 +28,7 @@ public class AccueilServiceImpl implements AccueilService {
         if(userRepository.findByMail(user.getMail()) == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             var saveduser = userRepository.save(user);
-            return jwtUtil.generateToken(saveduser);
+            return "Utilisateur inscris";
         }else{
             return "Utilisateur déjà inscrit";
         }
