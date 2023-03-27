@@ -24,9 +24,15 @@ public class AccueilServiceImpl implements AccueilService {
 
     @Override
     public String userInscription(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-      var saveduser = userRepository.save(user);
-      return jwtUtil.generateToken(saveduser);
+        // si l'utilisateur n'est pas inscrit on l'enregistre en base de données
+        if(userRepository.findByMail(user.getMail()) == null){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            var saveduser = userRepository.save(user);
+            return "Utilisateur inscris";
+        }else{
+            return "Utilisateur déjà inscrit";
+        }
+
 
     }
 
