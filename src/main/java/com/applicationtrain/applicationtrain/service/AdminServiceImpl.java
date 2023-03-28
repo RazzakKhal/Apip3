@@ -14,6 +14,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<User> findAllUser() {
       return userRepository.findAll();
+    }
+    @Override
+    public void deleteUserById(long id) {
+       userRepository.deleteById(id);
 
     }
 }
