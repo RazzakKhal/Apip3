@@ -3,10 +3,7 @@ package com.applicationtrain.applicationtrain.controller;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,9 @@ public class AdminController {
 
     }
 
+    @RequestMapping (value = "/deleteuser/{id}", method = RequestMethod.DELETE)
+    public void deleteUserById(@PathVariable long id){
 
+adminService.deleteUserById(id);
+    }
 }
