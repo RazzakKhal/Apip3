@@ -8,7 +8,9 @@ public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 10000)
+
+
+    @Column(columnDefinition = "LONGTEXT")
     private String link;
 
     @ManyToOne
