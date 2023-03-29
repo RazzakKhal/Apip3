@@ -6,8 +6,10 @@ import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AccueilService;
 import com.applicationtrain.applicationtrain.service.TokenResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +41,4 @@ public class AccueilController {
     else {
         throw new Exception("Erreur dans l'authentification");
     }
-}
-
-
-}
+}}
