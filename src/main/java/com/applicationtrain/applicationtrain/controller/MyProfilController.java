@@ -32,4 +32,34 @@ UserRepository userRepository;
         userRepository.save(user);
         return user;
     }
+
+    //testSandra
+    //nous devons recuperer de la BDD user qui correspond à celui d'angular
+    // ns devons modifier sa propriété description
+    @RequestMapping(value ="/updateDescription", method = RequestMethod.PUT)
+    public User updateUserDescription(@RequestBody User userAngular){
+        User user = userRepository.findByMail(userAngular.getMail());
+        user.setDescription(userAngular.getDescription());
+        userRepository.save(user);
+        return user;
+    }
+
+    //chamgement Train number de l'user
+    @RequestMapping(value ="/updateNumberTrain", method = RequestMethod.PUT)
+    public User updateNumberTrain(@RequestBody User userAngular){
+        User user = userRepository.findByMail(userAngular.getMail());
+        user.setTrain_number(userAngular.getTrain_number());
+        userRepository.save(user);
+        return user;
+    }
+
+
+    //changement voiture du train de l'utilisateur
+    @RequestMapping(value ="/updateCarTrain", method = RequestMethod.PUT)
+    public User updateCarTrain(@RequestBody User userAngular){
+        User user = userRepository.findByMail(userAngular.getMail());
+        user.setCar_number(userAngular.getCar_number());
+        userRepository.save(user);
+        return user;
+    }
 }
