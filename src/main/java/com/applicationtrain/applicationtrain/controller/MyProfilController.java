@@ -26,10 +26,19 @@ UserRepository userRepository;
     //je dois recuperer dans la BDD l'utilisateur qui correspond à celui envoyé d'Angular
     //je dois modifier sa proprieté size
 
-    @RequestMapping(value ="/udapteSize", method = RequestMethod.PUT)
-    public User udapteUserSize(@RequestBody User userAngular){
+    /*@RequestMapping(value ="/updateSize", method = RequestMethod.PUT)
+    public User updateUserSize(@RequestBody User userAngular){
       User user = userRepository.findByMail(userAngular.getMail());
       user.setSize(userAngular.getSize());
+      userRepository.save(user);
       return user;
+    }*/
+
+    @RequestMapping(value ="/updateSize", method = RequestMethod.PUT)
+    public User udapteUserSize(@RequestBody User userAngular){
+        User user = userRepository.findByMail(userAngular.getMail());
+        user.setSize(userAngular.getSize());
+        userRepository.save(user);
+        return user;
     }
 }
