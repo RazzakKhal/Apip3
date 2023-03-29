@@ -28,10 +28,9 @@ public class AccueilController {
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public HashMap<String, String> userRegister(@RequestBody User user) {
-         accueilService.userInscription(user);
-        HashMap<String, String> map = new HashMap<String, String>();
-        map.put("Succes", "Utilisateur Inscris");
-         return map;
+       return accueilService.userInscription(user);
+
+
     }
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
