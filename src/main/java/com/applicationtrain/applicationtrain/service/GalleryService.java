@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GalleryService {
 
-    List<User> usersByGenderM();
+    List<User> usersByGenderM(Long id);
 
     List<User> usersByGenderF(Long id);
 }
