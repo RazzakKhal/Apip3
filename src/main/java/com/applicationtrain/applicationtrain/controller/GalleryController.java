@@ -20,12 +20,13 @@ public class GalleryController {
 //récupérer les femmes en fonction du numéro de train de la femme qui envoi la requete
     @RequestMapping(value = "/femme/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> usersByGenderF(@PathVariable Long id){
-      return galleryService.usersByGenderF(id);
+
+        return galleryService.usersByGenderF(id);
     }
 
-    @RequestMapping(value = "/homme", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<User> usersByGenderM(){
-       return galleryService.usersByGenderM();
+    @RequestMapping(value = "/homme/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<User> usersByGenderM(@PathVariable Long id){
+       return galleryService.usersByGenderM(id);
     }
 
     @RequestMapping(value = "/testtoken", method = RequestMethod.GET)

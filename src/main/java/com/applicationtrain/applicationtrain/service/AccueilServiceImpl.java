@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Service
@@ -24,14 +25,18 @@ public class AccueilServiceImpl implements AccueilService {
 
 
     @Override
-    public String userInscription(User user) {
+    public HashMap<String, String> userInscription(User user) {
         // si l'utilisateur n'est pas inscrit on l'enregistre en base de données
         if(userRepository.findByMail(user.getMail()) == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             var saveduser = userRepository.save(user);
-            return "Utilisateur inscris";
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("Succes", "Utilisateur Inscris");
+            return map;
         }else{
-            return "Utilisateur déjà inscrit";
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("Succes", "Utilisateur déjà Inscris");
+            return map;
         }
 
 

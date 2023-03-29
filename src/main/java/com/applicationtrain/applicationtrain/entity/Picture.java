@@ -8,6 +8,7 @@ public class Picture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 10000)
     private String link;
 
     @ManyToOne
@@ -21,6 +22,8 @@ public class Picture {
         this.link = link;
         this.user = user;
     }
+
+
 
     public User getUser() {
         return user;
@@ -44,5 +47,9 @@ public class Picture {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public void setImageUrl(String imageUrl) {
     }
 }

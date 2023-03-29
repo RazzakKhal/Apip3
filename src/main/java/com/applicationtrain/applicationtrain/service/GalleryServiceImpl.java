@@ -13,8 +13,10 @@ public class GalleryServiceImpl implements GalleryService{
     @Autowired
     private UserRepository userRepository;
     @Override
-    public List<User> usersByGenderM(){
-        List<User> usersHommes = userRepository.findMaleByTrainNumber();
+    public List<User> usersByGenderM(Long id){
+        Optional<User> male = userRepository.findById(id);
+        // récupérer son numero de train
+        List<User> usersHommes = userRepository.findMaleByTrainNumber(male.get().getTrain_number());
         return usersHommes;
     }
     @Override

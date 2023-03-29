@@ -15,10 +15,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.firstname = :prenom")
     User findByfifi(@Param("prenom") String first);
 
+
+    /* Interroge la BDD et Recupere les femmes du meme train */
     @Query("select u from User u where u.gender = 'F' AND u.train_number = :nombre")
     List<User> findFemaleByTrainNumber(@Param("nombre") int trainNumber);
-    @Query("select u from User u where u.gender = 'M' AND u.train_number = 1850" )
-    List<User> findMaleByTrainNumber();
+
+    /* Interroge la BDD et Recupere les hommes du meme train */
+    @Query("select u from User u where u.gender = 'M' AND u.train_number = :nombre")
+    List<User> findMaleByTrainNumber(@Param("nombre") int trainNumber);
 
     <Optional>User findByMail(String mail);
 
