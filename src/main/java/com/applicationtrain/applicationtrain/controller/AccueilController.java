@@ -40,11 +40,16 @@ public class AccueilController {
     public TokenResponse userConnexion(@RequestBody User user) throws Exception {
         UserDetails userRecup = userRepository.findByMail(user.getMail());
         // ajouter le numero de train récupéré
-        if(userRecup != null){
+
+
+    if(userRecup != null){
             String token = jwtUtil.generateToken(userRecup);
            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword()));
+        User userRecup2 = userRepository.findByMail(user.getMail());
+        userRecup2.setTrain_number(user.getTrain_number());
+        userRepository.save(userRecup2);
 
-                return new TokenResponse(token);
+        return new TokenResponse(token);
         }
     else {
         throw new Exception("Erreur dans l'authentification");
