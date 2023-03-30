@@ -42,19 +42,19 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Picture> pictures;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "messageSender")
     private List<Message> messagesSended;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "messageReceiver")
     private List<Message> messagesReceived;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "likeSender")
     private List<LikeEntity> likesSended;
 
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "likeReceiver")
     private List<LikeEntity> likesReceived;
 

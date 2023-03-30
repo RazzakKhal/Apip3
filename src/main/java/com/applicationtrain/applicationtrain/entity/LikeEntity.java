@@ -10,12 +10,12 @@ public class LikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "like_sender")
     private User likeSender;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "like_receiver")
     private User likeReceiver;

@@ -11,7 +11,7 @@ public class Message {
     private Long id;
     private String content;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "message_sender")
     private User messageSender;

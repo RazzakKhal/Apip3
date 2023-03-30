@@ -39,6 +39,7 @@ public class AccueilController {
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
     public TokenResponse userConnexion(@RequestBody User user) throws Exception {
         UserDetails userRecup = userRepository.findByMail(user.getMail());
+        // ajouter le numero de train récupéré
         if(userRecup != null){
             String token = jwtUtil.generateToken(userRecup);
            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword()));
