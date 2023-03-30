@@ -1,6 +1,7 @@
 package com.applicationtrain.applicationtrain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,10 +10,12 @@ public class LikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "like_sender")
     private User likeSender;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "like_receiver")
     private User likeReceiver;

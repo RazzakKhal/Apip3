@@ -1,5 +1,6 @@
 package com.applicationtrain.applicationtrain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,7 @@ public class Picture {
     @Column(columnDefinition = "LONGTEXT")
     private String link;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

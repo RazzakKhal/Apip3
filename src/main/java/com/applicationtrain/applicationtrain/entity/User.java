@@ -2,6 +2,7 @@ package com.applicationtrain.applicationtrain.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,18 +38,23 @@ public class User implements UserDetails {
 
     private int size;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Picture> pictures;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "messageSender")
     private List<Message> messagesSended;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "messageReceiver")
     private List<Message> messagesReceived;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "likeSender")
     private List<LikeEntity> likesSended;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "likeReceiver")
     private List<LikeEntity> likesReceived;
 
@@ -107,7 +113,6 @@ public class User implements UserDetails {
     public void setMessagesReceived(List<Message> messagesReceived) {
         this.messagesReceived = messagesReceived;
     }
-
 
 
 

@@ -1,5 +1,6 @@
 package com.applicationtrain.applicationtrain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class Message {
     private Long id;
     private String content;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "message_sender")
     private User messageSender;
