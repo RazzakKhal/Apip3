@@ -4,6 +4,7 @@ import com.applicationtrain.applicationtrain.entity.Picture;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.PictureRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
+import com.applicationtrain.applicationtrain.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ public class PictureController {
     private UserRepository userRepository;
     @Autowired
     private PictureRepository pictureRepository;
+    @Autowired
+    private PictureService pictureService;
 
     @PostMapping(value = "/addpicture")
     public ResponseEntity<List<Picture>> savePicture(@RequestBody Picture imageUrl){ // recupere l'URL de l'img par POST
@@ -28,4 +31,12 @@ public class PictureController {
 
         return ResponseEntity.ok(user.getPictures()); //return une reponse HTTP 200
     }
-}
+    @RequestMapping (value = "/deletepicture/{id}", method = RequestMethod.DELETE)
+    public void deleteById(@PathVariable long id){
+        pictureService.deleteById(id);
+    }
+        }
+
+
+
+
