@@ -6,9 +6,11 @@ import com.applicationtrain.applicationtrain.repository.PictureRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.PictureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -32,8 +34,11 @@ public class PictureController {
         return ResponseEntity.ok(user.getPictures()); //return une reponse HTTP 200
     }
     @RequestMapping (value = "/deletepicture/{id}", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable long id){
+    public HashMap<String, String> deleteById(@PathVariable long id){
         pictureService.deleteById(id);
+        HashMap<String, String> reponse = new HashMap<>();
+        reponse.put("reponse", "photo supprimé");
+        return reponse;
     }
         }
 
