@@ -1,10 +1,15 @@
 package com.applicationtrain.applicationtrain.service;
 
+import com.applicationtrain.applicationtrain.entity.LikeEntity;
 import com.applicationtrain.applicationtrain.entity.User;
+import com.applicationtrain.applicationtrain.repository.LikeEntityRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +17,9 @@ import java.util.Optional;
 public class GalleryServiceImpl implements GalleryService{
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private LikeEntityRepository likeEntityRepository;
     @Override
     public List<User> usersByGenderM(Long id){
         Optional<User> male = userRepository.findById(id);
@@ -26,6 +34,29 @@ public class GalleryServiceImpl implements GalleryService{
         // récupérer son numero de train
         List<User> usersFemmes = userRepository.findFemaleByTrainNumber(female.get().getTrain_number());
         return usersFemmes;
+    }
+
+
+    @Override
+    public HashMap<String, String> sendLike(long id, User user){
+    Optional<User> userOptional = userRepository.findById(id);
+    if(userOptional != null){
+        User userReceived = userOptional.get();
+        LikeEntity like = new LikeEntity(user,userReceived);
+        likeEntityRepository.save(like);
+       HashMap<String,String> reponse = new HashMap<String,String>();
+        reponse.put("succes", "like enregistré");
+        return reponse;
+
+    }else{
+        HashMap<String,String> reponse = new HashMap<String,String>();
+        reponse.put("erreur", "like non enregistré");
+        return reponse;
+    }
+
+
+
+
     }
 }
 
