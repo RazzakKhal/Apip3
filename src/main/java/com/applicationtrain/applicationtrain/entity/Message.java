@@ -11,11 +11,12 @@ public class Message {
     private Long id;
     private String content;
 
-
+@JsonBackReference(value ="user_messageSender")
     @ManyToOne
     @JoinColumn(name = "message_sender")
     private User messageSender;
 
+@JsonBackReference(value ="user_messageReceiver")
     @ManyToOne
     @JoinColumn(name = "message_receiver")
     private User messageReceiver;
