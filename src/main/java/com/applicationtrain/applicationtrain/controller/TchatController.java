@@ -21,9 +21,9 @@ public class TchatController {
 
     @MessageMapping("/chat/send")
     public void handleMessage(Message message) {
-        // Traitez le message ici, par exemple, enregistrez-le dans la base de données
+        // j'enregistre le message en base de données
         messageRepository.save(message);
-        // Transmettez le message aux autres utilisateurs concernés
+        // Je renvoi le message afin que les personnes abonnées à l'url suivante voient le message
         messagingTemplate.convertAndSend("/topic/messages", message);
     }
 

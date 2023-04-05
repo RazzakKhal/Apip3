@@ -13,10 +13,12 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
         @Override
         public void registerStompEndpoints(StompEndpointRegistry registry) {
+            // ajout de la route à laquelle faire une requete pour se connecter et utiliser les websocket
             registry.addEndpoint("/chat").setAllowedOrigins("http://localhost:4200").withSockJS();
         }
         @Override
         public void configureMessageBroker(MessageBrokerRegistry registry) {
+            // ajout des prefixes, lors de l'envoi d'un message on ajoutera au debut de notre route /app
             registry.setApplicationDestinationPrefixes("/app");
             registry.enableSimpleBroker("/topic");
         }
