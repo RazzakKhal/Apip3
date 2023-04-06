@@ -1,5 +1,6 @@
 package com.applicationtrain.applicationtrain.repository;
 
+import com.applicationtrain.applicationtrain.entity.LikeEntity;
 import com.applicationtrain.applicationtrain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,5 +26,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findMaleByTrainNumber(@Param("nombre") int trainNumber);
 
     <Optional>User findByMail(String mail);
+
+
 
 }

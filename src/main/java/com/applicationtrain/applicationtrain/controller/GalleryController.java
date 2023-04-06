@@ -49,9 +49,12 @@ public class GalleryController {
 
     }
 
+    //Envoi des likes concernant l'utilisateur associé aux personnes qui ont liké celui ci
     @RequestMapping(value = "/collectLike/{id}", method = RequestMethod.GET)
-    public List<LikeEntity> getLike(@PathVariable long id){
-        return likeEntityRepository.findBySenderId(id);
+    public List<Object[]> getLike(@PathVariable Long id){
+        List<Object[]> myLikes = likeEntityRepository.findLikesByUserId(id);
+
+     return myLikes;
     }
 
 
