@@ -38,23 +38,25 @@ public class User implements UserDetails {
 
     private int size;
 
-    @JsonManagedReference
+    @JsonManagedReference(value ="user_picture")
     @OneToMany(mappedBy = "user")
     private List<Picture> pictures;
 
 
+    @JsonManagedReference(value ="user_messageSender")
     @OneToMany(mappedBy = "messageSender")
     private List<Message> messagesSended;
 
 
+    @JsonManagedReference(value ="user_messageReceiver")
     @OneToMany(mappedBy = "messageReceiver")
     private List<Message> messagesReceived;
 
-
+@JsonManagedReference(value ="user_likeSender")
     @OneToMany(mappedBy = "likeSender")
     private List<LikeEntity> likesSended;
 
-
+@JsonManagedReference(value ="user_userReceiver")
     @OneToMany(mappedBy = "likeReceiver")
     private List<LikeEntity> likesReceived;
 

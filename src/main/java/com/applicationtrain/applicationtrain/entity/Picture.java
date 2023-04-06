@@ -14,7 +14,7 @@ public class Picture {
     @Column(columnDefinition = "LONGTEXT")
     private String link;
 
-    @JsonBackReference
+    @JsonBackReference(value ="user_picture")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
