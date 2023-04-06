@@ -2,6 +2,7 @@ package com.applicationtrain.applicationtrain.controller;
 
 import com.applicationtrain.applicationtrain.entity.LikeEntity;
 import com.applicationtrain.applicationtrain.entity.User;
+import com.applicationtrain.applicationtrain.repository.LikeEntityRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class GalleryController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    LikeEntityRepository likeEntityRepository;
 
 //récupérer les femmes en fonction du numéro de train de la femme qui envoi la requete
     @RequestMapping(value = "/femme/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,8 +49,13 @@ public class GalleryController {
 
     }
 
+    @RequestMapping(value = "/collectLike/{id}", method = RequestMethod.GET)
+    public List<LikeEntity> getLike(@PathVariable long id){
+        return likeEntityRepository.findBySenderId(id);
+    }
 
 
-    // methode qui permet de récuperer les likes de la personne connecté
-    // on va savoir qui est la personne connecté par son id
+    //Aller dans LikeRepository, créer une méthode avec @Query permettant de récupérer des likes par l'id de l'utilisateur
+    //Creer une méthode qui va retourner les likes de l'utilisateur qui est connecté
+
 }
