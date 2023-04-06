@@ -44,4 +44,9 @@ public class GalleryController {
         return galleryService.sendLike(id, connectedUser);
 
     }
+
+
+
+    // methode qui permet de récuperer les likes de la personne connecté
+    // on va savoir qui est la personne connecté par son id
 }
