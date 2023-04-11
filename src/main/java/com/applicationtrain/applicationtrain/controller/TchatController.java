@@ -11,10 +11,9 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -41,7 +40,18 @@ public class TchatController {
         messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageReceiver().getId() + "/" + message.getMessageSender().getId(), message);
         messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageSender().getId() + "/" + message.getMessageReceiver().getId(), message);
 
+// 10
+        // 12
+        // topic/message/10/
+    }
 
+    @RequestMapping(value = "messagerie/{idSender}/{idReceiver}", method = RequestMethod.GET)
+    public List<Message> findMyMessages(@PathVariable long idSender, @PathVariable long idReceiver) throws Exception {
+       if(messageRepository.findMessages(idSender, idReceiver) != null){
+           return messageRepository.findMessages(idSender, idReceiver);
+       }else{
+           throw new Exception("Messages non trouvés");
+       }
     }
 
 }
