@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+
 @CrossOrigin
+@Controller
 public class TchatController {
 
     @Autowired
@@ -45,13 +46,15 @@ public class TchatController {
         // topic/message/10/
     }
 
+
     @RequestMapping(value = "messagerie/{idSender}/{idReceiver}", method = RequestMethod.GET)
+    @ResponseBody
     public List<Message> findMyMessages(@PathVariable long idSender, @PathVariable long idReceiver) throws Exception {
-       if(messageRepository.findMessages(idSender, idReceiver) != null){
-           return messageRepository.findMessages(idSender, idReceiver);
-       }else{
-           throw new Exception("Messages non trouvés");
-       }
+        if(messageRepository.findMessages(idSender, idReceiver) != null){
+            return messageRepository.findMessages(idSender, idReceiver);
+        }else{
+            throw new Exception("Messages non trouvés");
+        }
     }
 
 }
