@@ -61,4 +61,18 @@ public class GalleryController {
     //Aller dans LikeRepository, créer une méthode avec @Query permettant de récupérer des likes par l'id de l'utilisateur
     //Creer une méthode qui va retourner les likes de l'utilisateur qui est connecté
 
+
+
+
+// Méthode pour récupérer les likes de l'utilisateur connecté
+    @RequestMapping(value = "/myLikes/{id}", method = RequestMethod.GET)
+    public List<LikeEntity> getMyLikes(@PathVariable Long id) {
+        return likeEntityRepository.findBySenderId(id);
+    }
+
+    // Méthode pour récupérer les utilisateurs qui ont liké l'utilisateur connecté
+    @RequestMapping(value = "/likedUsers/{id}", method = RequestMethod.GET)
+    public List<Object[]> getLikedUsers(@PathVariable Long id) {
+        return likeEntityRepository.findLikesByUserId(id);
+    }
 }
