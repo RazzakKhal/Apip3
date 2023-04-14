@@ -11,12 +11,12 @@ public class LikeEntity {
     private Long id;
 
 @JsonBackReference(value ="user_likeSender")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "like_sender")
     private User likeSender;
 
 @JsonBackReference(value ="user_userReceiver")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "like_receiver")
     private User likeReceiver;
 

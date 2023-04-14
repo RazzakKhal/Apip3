@@ -39,25 +39,25 @@ public class User implements UserDetails {
     private int size;
 
     @JsonManagedReference(value ="user_picture")
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Picture> pictures;
 
 
     @JsonManagedReference(value ="user_messageSender")
-    @OneToMany(mappedBy = "messageSender")
+    @OneToMany(mappedBy = "messageSender", cascade = CascadeType.REMOVE)
     private List<Message> messagesSended;
 
 
     @JsonManagedReference(value ="user_messageReceiver")
-    @OneToMany(mappedBy = "messageReceiver")
+    @OneToMany(mappedBy = "messageReceiver", cascade = CascadeType.REMOVE)
     private List<Message> messagesReceived;
 
 @JsonManagedReference(value ="user_likeSender")
-    @OneToMany(mappedBy = "likeSender")
+    @OneToMany(mappedBy = "likeSender", cascade = CascadeType.REMOVE)
     private List<LikeEntity> likesSended;
 
 @JsonManagedReference(value ="user_userReceiver")
-    @OneToMany(mappedBy = "likeReceiver")
+    @OneToMany(mappedBy = "likeReceiver", cascade = CascadeType.REMOVE)
     private List<LikeEntity> likesReceived;
 
 
