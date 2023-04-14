@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PictureService {
 
-    void deleteById(long id);
+
+
+    void deleteById(long id, User user);
 }
 

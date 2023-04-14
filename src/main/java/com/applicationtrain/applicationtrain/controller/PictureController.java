@@ -34,8 +34,8 @@ public class PictureController {
         return ResponseEntity.ok(user.getPictures()); //return une reponse HTTP 200
     }
     @RequestMapping (value = "/deletepicture/{id}", method = RequestMethod.DELETE)
-    public HashMap<String, String> deleteById(@PathVariable long id){
-        pictureService.deleteById(id);
+    public HashMap<String, String> deleteById(@PathVariable long id, @RequestBody User user){
+        pictureService.deleteById(id, user);
         HashMap<String, String> reponse = new HashMap<>();
         reponse.put("reponse", "photo supprimé");
         return reponse;

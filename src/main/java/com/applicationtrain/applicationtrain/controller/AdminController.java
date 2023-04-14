@@ -22,6 +22,7 @@ public class AdminController {
 
     @RequestMapping (value = "/deleteuser/{id}", method = RequestMethod.DELETE)
     public void deleteUserById(@PathVariable long id){
+        // verifier que l'utilisateur qui fait la requete est un ADMIN
         adminService.deleteUserById(id);
     }
 }
