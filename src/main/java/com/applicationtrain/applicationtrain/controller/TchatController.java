@@ -36,11 +36,9 @@ public class TchatController {
            // j'enregistre le message en base de données en y ajoutant l'envoyeur et le receveur
            messageRepository.save(message);
 
-           // je le renvoi au receveur et à l'envoyeur
+           // je le renvoi au receveur
 
-
-
-        messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageReceiver().getId() + "/" + message.getMessageSender().getId(), message);
+     //   messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageReceiver().getId() + "/" + message.getMessageSender().getId(), message);
         messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageSender().getId() + "/" + message.getMessageReceiver().getId(), message);
 
 // 10

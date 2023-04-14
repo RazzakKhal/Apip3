@@ -15,7 +15,7 @@ public class Picture {
     private String link;
 
     @JsonBackReference(value ="user_picture")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")
     private User user;
 

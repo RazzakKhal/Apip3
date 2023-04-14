@@ -15,9 +15,9 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 
     //#augmentation de la mémoire tampon pour l'envoi des message via websocket
     public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-        registration.setMessageSizeLimit(2000000); // default : 64 * 1024
-        registration.setSendTimeLimit(20 * 10000); // default : 10 * 10000
-        registration.setSendBufferSizeLimit(3* 512 * 1024); // default : 512 * 1024
+        registration.setMessageSizeLimit(1024 * 1024); // default : 64 * 1024
+        registration.setSendTimeLimit(200 * 10000); // default : 10 * 10000
+        registration.setSendBufferSizeLimit(30* 512 * 1024); // default : 512 * 1024
 
     }
 }

@@ -40,7 +40,16 @@ public class GalleryServiceImpl implements GalleryService{
     /*@Override
     public HashMap<String, String> sendLike(long id, User user){
     Optional<User> userOptional = userRepository.findById(id);
+
+
+
     if(userOptional != null){
+        // récuperer les likes du User
+        // vérifier que le User n'a pas déjà like la personne dont on a l'id
+
+
+
+
         User userReceived = userOptional.get();
         LikeEntity like = new LikeEntity(user,userReceived);
         likeEntityRepository.save(like);
