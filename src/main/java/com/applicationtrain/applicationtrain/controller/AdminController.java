@@ -24,4 +24,5 @@ public class AdminController {
     public void deleteUserById(@PathVariable long id){
         adminService.deleteUserById(id);
     }
+    /*verifier que l'utilisateur qui fait la requete est un ADMIN*/
 }
