@@ -1,9 +1,13 @@
 package com.applicationtrain.applicationtrain.service;
 
 import com.applicationtrain.applicationtrain.entity.User;
+import com.applicationtrain.applicationtrain.repository.LikeEntityRepository;
+import com.applicationtrain.applicationtrain.repository.UserRepository;
+
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public interface GalleryService {
 

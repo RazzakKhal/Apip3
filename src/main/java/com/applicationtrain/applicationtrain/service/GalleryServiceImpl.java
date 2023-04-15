@@ -37,7 +37,7 @@ public class GalleryServiceImpl implements GalleryService{
     }
 
 
-    @Override
+    /*@Override
     public HashMap<String, String> sendLike(long id, User user){
     Optional<User> userOptional = userRepository.findById(id);
 
@@ -61,18 +61,31 @@ public class GalleryServiceImpl implements GalleryService{
         HashMap<String,String> reponse = new HashMap<String,String>();
         reponse.put("erreur", "like non enregistré");
         return reponse;
-    }
+    }*/
 
-
-
-
-    }
-}
-
-
-    /*@Override
-    public List<Produit> findByNomProduitContains(String nom) {
-        return produitRepository.findByNomProduitContains(nom);
-    }
     @Override
-    public List<Produit> findByNomPrix(String nom, Double prix) {*/
+    public HashMap<String, String> sendLike(long id, User user) {
+        Optional<User> userOptional = userRepository.findById(id);
+        HashMap<String, String> reponse = new HashMap<>();
+
+        if (userOptional.isPresent()) {
+            User userReceived = userOptional.get();
+            Optional<LikeEntity> existingLike = likeEntityRepository.findByLikeSenderAndLikeReceiver(user, userReceived);
+
+            if (existingLike.isPresent()) {
+                reponse.put("erreur", "like déjà enregistré");
+            } else {
+                LikeEntity like = new LikeEntity(user, userReceived);
+                likeEntityRepository.save(like);
+                reponse.put("succes", "like enregistré");
+            }
+        } else {
+            reponse.put("erreur", "like non enregistré");
+        }
+
+        return reponse;
+    }
+
+
+
+    }
