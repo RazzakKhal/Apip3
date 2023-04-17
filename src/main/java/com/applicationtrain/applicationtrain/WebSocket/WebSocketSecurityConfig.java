@@ -1,4 +1,4 @@
-package com.applicationtrain.applicationtrain;
+package com.applicationtrain.applicationtrain.WebSocket;
 
 
 import org.springframework.context.annotation.Configuration;

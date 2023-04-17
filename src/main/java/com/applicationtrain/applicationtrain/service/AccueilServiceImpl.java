@@ -1,17 +1,12 @@
 package com.applicationtrain.applicationtrain.service;
 
-import com.applicationtrain.applicationtrain.JwtUtil;
+import com.applicationtrain.applicationtrain.Token.JwtUtil;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 

@@ -1,5 +1,6 @@
-package com.applicationtrain.applicationtrain;
+package com.applicationtrain.applicationtrain.Token;
 
+import com.applicationtrain.applicationtrain.Token.JwtUtil;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
