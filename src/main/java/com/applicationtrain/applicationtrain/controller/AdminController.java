@@ -31,7 +31,7 @@ public class AdminController {
         if(userRepository.findByMail(user.getMail()) != null){
             User userConnected= userRepository.findByMail(user.getMail());
             // Verifier si le rôle de l'utilisateur connecté est bien ADMIN
-                if(userConnected.getRole() == "ADMIN"){
+                if("ADMIN".equals(userConnected.getRole())){
                     //Supprime l'utilisateur par son ID
                     adminService.deleteUserById(id);
                 }
