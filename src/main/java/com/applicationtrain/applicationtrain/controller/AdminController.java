@@ -5,7 +5,6 @@ import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -14,14 +13,12 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-
     @Autowired
     private UserRepository userRepository;
 //Méthode pour récupérer tous les utilisateurs
     @RequestMapping (value = "/alluser", method = RequestMethod.GET)
    public List<User> findAllUser(){
        return adminService.findAllUser();
-
     }
 //Méthode pour supprimer un utilisateur par son ID
     @RequestMapping (value = "/deleteuser/{id}", method = RequestMethod.DELETE)
