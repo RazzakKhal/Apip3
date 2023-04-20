@@ -1,14 +1,10 @@
 package com.applicationtrain.applicationtrain.controller;
 
-import com.applicationtrain.applicationtrain.entity.Message;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.MessageRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("otherProfil")
