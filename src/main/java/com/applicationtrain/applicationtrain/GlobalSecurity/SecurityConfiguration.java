@@ -2,6 +2,7 @@ package com.applicationtrain.applicationtrain.GlobalSecurity;
 
 import com.applicationtrain.applicationtrain.Token.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,12 +22,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
 
-    private final UserDetailsService userDetailsService;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private  JwtAuthenticationFilter jwtAuthenticationFilter;
 
 
     @Bean
@@ -54,11 +54,6 @@ public class SecurityConfiguration {
     public BCryptPasswordEncoder passwordEncoder() {
         // pour pouvoir faire l'injection de dépendance de BCryptPasswordEncoder
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
     }
 
 
