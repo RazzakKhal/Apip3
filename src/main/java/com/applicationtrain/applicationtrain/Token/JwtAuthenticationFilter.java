@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +19,11 @@ import java.io.IOException;
 //La classe JwtAuthenticationFilter étend la classe OncePerRequestFilter de Spring Security,
 // qui est un filtre personnalisé exécuté une seule fois pour chaque requête HTTP.
 @Component
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    final private UserRepository userRepository;
-    final private JwtUtil jwtUtil;
+     @Autowired
+     private UserRepository userRepository;
+     @Autowired
+     private JwtUtil jwtUtil;
 
 
     @Override

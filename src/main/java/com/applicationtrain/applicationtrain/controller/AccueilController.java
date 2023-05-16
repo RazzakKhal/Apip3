@@ -5,22 +5,26 @@ import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AccueilService;
 import com.applicationtrain.applicationtrain.service.TokenResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
 @CrossOrigin
-@RequiredArgsConstructor
 @RequestMapping("/accueil")
 public class AccueilController {
-    private final AccueilService accueilService;
-    private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private  AccueilService accueilService;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  JwtUtil jwtUtil;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public HashMap<String, String> userRegister(@RequestBody User user) {
@@ -34,9 +38,9 @@ public class AccueilController {
         // ajouter le numero de train récupéré
 
 
-    if(userRecup != null){
-            String token = jwtUtil.generateToken(userRecup);
-           authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getMail(), user.getPassword()));
+    if(userRecup != null && bCryptPasswordEncoder.matches(user.getPassword(),userRecup.getPassword())){
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userRecup, null, userRecup.getAuthorities()));
+        String token = jwtUtil.generateToken(userRecup);
         User userRecup2 = userRepository.findByMail(user.getMail());
         userRecup2.setTrain_number(user.getTrain_number());
         userRepository.save(userRecup2);
