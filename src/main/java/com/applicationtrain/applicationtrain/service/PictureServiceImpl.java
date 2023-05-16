@@ -6,7 +6,6 @@ import com.applicationtrain.applicationtrain.repository.PictureRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

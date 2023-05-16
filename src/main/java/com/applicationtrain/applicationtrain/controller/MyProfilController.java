@@ -3,7 +3,6 @@ package com.applicationtrain.applicationtrain.controller;
 import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.MyProfilService;
-import com.applicationtrain.applicationtrain.service.MyProfilServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +20,6 @@ UserRepository userRepository;
        return myProfilService.getUserTokenByMail(user.getMail());
     }
 
-
-    //test sandra pour myProfil put
     //je dois recuperer dans la BDD l'utilisateur qui correspond à celui envoyé d'Angular
     //je dois modifier sa proprieté size
     @RequestMapping(value ="/updateSize", method = RequestMethod.PUT)
@@ -33,9 +30,8 @@ UserRepository userRepository;
         return user;
     }
 
-    //testSandra
     //nous devons recuperer de la BDD user qui correspond à celui d'angular
-    // ns devons modifier sa propriété description
+    // nous devons modifier sa propriété description
     @RequestMapping(value ="/updateDescription", method = RequestMethod.PUT)
     public User updateUserDescription(@RequestBody User userAngular){
         User user = userRepository.findByMail(userAngular.getMail());
@@ -44,7 +40,7 @@ UserRepository userRepository;
         return user;
     }
 
-    //chamgement Train number de l'user
+    //changement Train number de l'user
     @RequestMapping(value ="/updateNumberTrain", method = RequestMethod.PUT)
     public User updateNumberTrain(@RequestBody User userAngular){
         User user = userRepository.findByMail(userAngular.getMail());

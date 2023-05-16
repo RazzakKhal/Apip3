@@ -6,12 +6,10 @@ import com.applicationtrain.applicationtrain.repository.UserRepository;
 import com.applicationtrain.applicationtrain.service.AccueilService;
 import com.applicationtrain.applicationtrain.service.TokenResponse;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 
 @RestController
@@ -27,6 +25,7 @@ public class AccueilController {
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public HashMap<String, String> userRegister(@RequestBody User user) {
        return accueilService.userInscription(user);
+
     }
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
@@ -41,10 +40,8 @@ public class AccueilController {
         User userRecup2 = userRepository.findByMail(user.getMail());
         userRecup2.setTrain_number(user.getTrain_number());
         userRepository.save(userRecup2);
-
         return new TokenResponse(token);
-        }
-    else {
+        } else {
         throw new Exception("Erreur dans l'authentification");
     }
 }}

@@ -2,19 +2,15 @@ package com.applicationtrain.applicationtrain.controller;
 
 import com.applicationtrain.applicationtrain.entity.Message;
 
-import com.applicationtrain.applicationtrain.entity.User;
 import com.applicationtrain.applicationtrain.repository.MessageRepository;
 import com.applicationtrain.applicationtrain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.core.MessageSendingOperations;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 
 @CrossOrigin
@@ -41,13 +37,7 @@ public class TchatController {
      //   messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageReceiver().getId() + "/" + message.getMessageSender().getId(), message);
         messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageSender().getId() + "/" + message.getMessageReceiver().getId(), message);
 
-// 10
-        // 12
-        // topic/message/10/
     }
-
-
-
     @RequestMapping(value = "messagerie/{idSender}/{idReceiver}", method = RequestMethod.GET)
     @ResponseBody
     public List<Message> findMyMessages(@PathVariable long idSender, @PathVariable long idReceiver) throws Exception {

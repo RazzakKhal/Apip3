@@ -8,10 +8,8 @@ import com.applicationtrain.applicationtrain.service.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -46,25 +44,18 @@ public class GalleryController {
     @RequestMapping(value = "/like/{id}", method = RequestMethod.POST)
     public HashMap<String, String> sendLike(@PathVariable long id, @RequestBody User connectedUser){
         return galleryService.sendLike(id, connectedUser);
-
     }
 
     //Envoi des likes concernant l'utilisateur associé aux personnes qui ont liké celui ci
     @RequestMapping(value = "/collectLike/{id}", method = RequestMethod.GET)
     public List<Object[]> getLike(@PathVariable Long id){
         List<Object[]> myLikes = likeEntityRepository.findLikesByUserId(id);
-
-     return myLikes;
+        return myLikes;
     }
 
 
     //Aller dans LikeRepository, créer une méthode avec @Query permettant de récupérer des likes par l'id de l'utilisateur
-    //Creer une méthode qui va retourner les likes de l'utilisateur qui est connecté
-
-
-
-
-// Méthode pour récupérer les likes de l'utilisateur connecté
+    // Méthode pour récupérer les likes de l'utilisateur connecté
     @RequestMapping(value = "/myLikes/{id}", method = RequestMethod.GET)
     public List<LikeEntity> getMyLikes(@PathVariable Long id) {
         return likeEntityRepository.findBySenderId(id);
