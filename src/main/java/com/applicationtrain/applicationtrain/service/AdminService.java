@@ -7,6 +7,4 @@ import java.util.List;
 public interface AdminService {
     public List<User> findAllUser();
     public void deleteUserById(long id);
-
-
 }

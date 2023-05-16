@@ -11,7 +11,7 @@ public class Message {
     private Long id;
     private String content;
 
-@JsonBackReference(value ="user_messageSender")
+    @JsonBackReference(value ="user_messageSender")
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "message_sender")
     private User messageSender;

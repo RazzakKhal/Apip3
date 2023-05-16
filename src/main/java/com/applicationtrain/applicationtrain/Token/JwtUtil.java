@@ -1,7 +1,6 @@
 package com.applicationtrain.applicationtrain.Token;
 
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,7 +18,6 @@ public class JwtUtil {
 
     @Value("${app.jwt.secret}")
     private String SECRET_KEY;
-
 
     @Value("${app.jwt.expiration}")
     private Long expiration;

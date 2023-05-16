@@ -4,6 +4,8 @@ package com.applicationtrain.applicationtrain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,17 +21,34 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String firstname;
+
+    @NotBlank
     private String lastname;
 
+    @NotBlank
     private String role;
+
+
     private Date date_of_birth;
+
+    @NotBlank
     private String pseudo;
+
+    @NotBlank
+    @Email
     private String mail;
 
+    @NotBlank
+    @Size(min = 6)
     private String password;
 
+    @NotBlank
     private String gender;
+
+
     private int train_number;
 
     private int car_number;
@@ -56,7 +75,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "likeSender", cascade = CascadeType.REMOVE)
     private List<LikeEntity> likesSended;
 
-@JsonManagedReference(value ="user_userReceiver")
+    @JsonManagedReference(value ="user_userReceiver")
     @OneToMany(mappedBy = "likeReceiver", cascade = CascadeType.REMOVE)
     private List<LikeEntity> likesReceived;
 

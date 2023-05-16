@@ -17,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/picture")
 public class PictureController {
-
     @Autowired
     private UserRepository userRepository;
     @Autowired

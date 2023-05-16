@@ -21,8 +21,6 @@ public interface LikeEntityRepository extends JpaRepository<LikeEntity, Long> {
 // requete permettant de recuperer chaque like + l'utilisateur ayant envoyé le like
     @Query("SELECT l, l.likeSender FROM LikeEntity l WHERE l.likeReceiver.id = :userId")
     List<Object[]> findLikesByUserId(@Param("userId") Long userId);
-
     Optional<LikeEntity> findByLikeSenderAndLikeReceiver(User likeSender, User likeReceiver);
-
-
 }
+

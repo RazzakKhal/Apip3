@@ -19,7 +19,6 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 @RequestMapping("/accueil")
 public class AccueilController {
-
     private final AccueilService accueilService;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
@@ -28,8 +27,6 @@ public class AccueilController {
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public HashMap<String, String> userRegister(@RequestBody User user) {
        return accueilService.userInscription(user);
-
-
     }
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)

@@ -38,8 +38,6 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
-
-
                 .cors();// ajoute une en-tete CORS aux réponses (sans quoi erreur)
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // cela signifie que l'on n'utilisera pas de session pour stocker des infos coté back
@@ -48,7 +46,6 @@ public class SecurityConfiguration {
         // j'ajoute le filtre que j'ai créé jwtAuthenticationFilter à la liste des filtres de spring, je lui dis de le lancer
         // avant son filtre UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 

@@ -17,6 +17,8 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+
 //Méthode pour récupérer tous les utilisateurs
     @RequestMapping (value = "/alluser", method = RequestMethod.GET)
    public List<User> findAllUser(){
@@ -36,7 +38,6 @@ public class AdminController {
                     adminService.deleteUserById(id);
                 }
             }
-
     }
 
 }
