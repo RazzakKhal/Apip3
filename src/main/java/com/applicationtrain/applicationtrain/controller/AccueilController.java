@@ -18,34 +18,38 @@ import java.util.HashMap;
 @RequestMapping("/accueil")
 public class AccueilController {
     @Autowired
-    private  AccueilService accueilService;
+    private AccueilService accueilService;
     @Autowired
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    private  JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public HashMap<String, String> userRegister(@RequestBody User user) {
-       return accueilService.userInscription(user);
+        return accueilService.userInscription(user);
 
     }
 
     @RequestMapping(value = "/connexion", method = RequestMethod.POST)
-    public TokenResponse userConnexion(@RequestBody User user) throws Exception {
+    public HashMap userConnexion(@RequestBody User user) throws Exception {
         UserDetails userRecup = userRepository.findByMail(user.getMail());
-        // ajouter le numero de train récupéré
+        HashMap reponse = new HashMap();
 
+        if (userRecup != null && bCryptPasswordEncoder.matches(user.getPassword(), userRecup.getPassword())) {
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userRecup, null, userRecup.getAuthorities()));
+            String token = jwtUtil.generateToken(userRecup);
+            User userRecup2 = userRepository.findByMail(user.getMail());
+            userRecup2.setTrain_number(user.getTrain_number());
+            userRepository.save(userRecup2);
+            reponse.put("token", token);
+            return reponse;
 
-    if(userRecup != null && bCryptPasswordEncoder.matches(user.getPassword(),userRecup.getPassword())){
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userRecup, null, userRecup.getAuthorities()));
-        String token = jwtUtil.generateToken(userRecup);
-        User userRecup2 = userRepository.findByMail(user.getMail());
-        userRecup2.setTrain_number(user.getTrain_number());
-        userRepository.save(userRecup2);
-        return new TokenResponse(token);
         } else {
-        throw new Exception("Erreur dans l'authentification");
+            reponse.put("error", " Erreur dans l'authentification");
+            return reponse;
+        }
+
     }
-}}
+}
