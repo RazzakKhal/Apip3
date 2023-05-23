@@ -23,7 +23,7 @@ public class AccueilServiceImpl implements AccueilService {
         // si l'utilisateur n'est pas inscrit on l'enregistre en base de données
         if(userRepository.findByMail(user.getMail()) == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            var saveduser = userRepository.save(user);
+            userRepository.save(user);
             HashMap<String, String> map = new HashMap<String, String>();
             map.put("Succes", "Utilisateur Inscris");
             return map;
