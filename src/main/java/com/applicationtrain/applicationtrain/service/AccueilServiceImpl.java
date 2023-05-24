@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -21,7 +22,7 @@ public class AccueilServiceImpl implements AccueilService {
     @Override
     public HashMap<String, String> userInscription(User user) {
         // si l'utilisateur n'est pas inscrit on l'enregistre en base de données
-        if(userRepository.findByMail(user.getMail()) == null){
+        if(userRepository.findByMail(user.getMail()) == null && Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",user.getPassword())){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             HashMap<String, String> map = new HashMap<String, String>();

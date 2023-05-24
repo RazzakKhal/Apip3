@@ -26,7 +26,7 @@ public class User implements UserDetails {
     @NotBlank
     private String lastname;
 
-    @NotBlank
+
     private String role;
 
 
@@ -40,7 +40,6 @@ public class User implements UserDetails {
     private String mail;
 
     @NotBlank
-    @Size(min = 6)
     private String password;
 
     @NotBlank
