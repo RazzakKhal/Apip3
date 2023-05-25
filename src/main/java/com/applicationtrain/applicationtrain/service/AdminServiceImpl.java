@@ -16,6 +16,12 @@ public class AdminServiceImpl implements AdminService {
     }
     @Override
     public void deleteUserById(long id) {
+        // récupérer l'utilisateur en base de donnée qui a l'id en parametre
+
+        // supprimer ses photos
+
+        // supprimer ses messages
+
        userRepository.deleteById(id);
 
     }
