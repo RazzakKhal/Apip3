@@ -23,12 +23,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
-
     @Autowired
     private  JwtAuthenticationFilter jwtAuthenticationFilter;
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -48,14 +44,11 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         // pour pouvoir faire l'injection de dépendance de BCryptPasswordEncoder
         return new BCryptPasswordEncoder();
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
