@@ -16,10 +16,10 @@ public class AccueilServiceImpl implements AccueilService {
 
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
-   private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    @Override
+    @Override // methode qui est dans mon AccueilService
     public HashMap<String, String> userInscription(User user) {
         // si l'utilisateur n'est pas inscrit on l'enregistre en base de données
         if(userRepository.findByMail(user.getMail()) == null && Pattern.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\\w\\d\\s:])([^\\s]){8,}$",user.getPassword())){
@@ -33,8 +33,6 @@ public class AccueilServiceImpl implements AccueilService {
             map.put("Succes", "Utilisateur déjà Inscris");
             return map;
         }
-
-
     }
 
 

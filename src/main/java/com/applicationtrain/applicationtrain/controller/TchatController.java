@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-
 @CrossOrigin
 @Controller
 public class TchatController {
@@ -34,18 +33,9 @@ public class TchatController {
 
            // je le renvoi au receveur
 
-     //   messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageReceiver().getId() + "/" + message.getMessageSender().getId(), message);
-        messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageSender().getId() + "/" + message.getMessageReceiver().getId(), message);
+        messagingTemplate.convertAndSend("/topic/messages/" + message.getMessageSender().getId()
+                + "/" + message.getMessageReceiver().getId(), message);
 
-    }
-    @RequestMapping(value = "messagerie/{idSender}/{idReceiver}", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Message> findMyMessages(@PathVariable long idSender, @PathVariable long idReceiver) throws Exception {
-        if(messageRepository.findMessages(idSender, idReceiver) != null){
-            return messageRepository.findMessages(idSender, idReceiver);
-        }else{
-            throw new Exception("Messages non trouvés");
-        }
     }
 
     // faire une requete pour récupérer messages envoyés
@@ -60,7 +50,6 @@ public class TchatController {
     }
 
     // faire une requete pour récupérer messages recus
-
     @RequestMapping(value = "messageriereceive/{idSender}/{idReceiver}", method = RequestMethod.GET)
     @ResponseBody
     public List<Message> findMyMessagesReceive(@PathVariable long idSender, @PathVariable long idReceiver) throws Exception {
@@ -70,5 +59,4 @@ public class TchatController {
             throw new Exception("Messages non trouvés");
         }
     }
-
 }
