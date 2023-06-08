@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
+
        // requete permettant de récupérer les messages envoyé
     @Query("SELECT m FROM Message m WHERE m.messageSender.id = :idSender AND m.messageReceiver.id = :idReceiver ORDER BY m.id ASC")
     List<Message> findMessagesSend(@Param("idSender") long idSender, @Param("idReceiver") long idReceiver);
